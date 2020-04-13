@@ -22,7 +22,9 @@
 				<label for="termChk">회원가입에 동의하십니까?</label>
 			</div>
 			<div class="btn-group">
-				<button type="submit" class="btn success">회원가입완료</button>
+				<button type="submit" class="btn success" :disabled="!validation">
+					회원가입완료
+				</button>
 			</div>
 		</form>
 	</div>
@@ -30,6 +32,7 @@
 
 <script>
 export default {
+	middleware: 'validation',
 	data() {
 		return {
 			email: '',
@@ -38,9 +41,24 @@ export default {
 			passwordChk: '',
 		};
 	},
+	// computed: {
+	// 	emailVal() {
+	// 		return this.validation(this.email);
+	// 	},
+	// },
 	methods: {
-		onSubmitForm() {
-			console.log(1);
+		async onSubmitForm() {
+			const userData = {
+				email: this.email,
+				nickname: this.nickname,
+				password: this.password,
+			};
+			try {
+				const data = await this.$store.dispatch('users/signup', userData);
+				// this.$router.push('/');
+			} catch (error) {
+				console.log(error);
+			}
 		},
 	},
 };
