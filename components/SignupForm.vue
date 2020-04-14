@@ -3,7 +3,10 @@
 		<form @submit.prevent="onSubmitForm" class="form-wrapper">
 			<div class="form-area">
 				<label for="email">이메일</label>
-				<input id="email" v-model="email" type="email" />
+				<input id="email" v-model="email" type="text" />
+				<p class="validation-text" v-if="!emailValid && this.email">
+					이메일 형식이 아닙니다.
+				</p>
 			</div>
 			<div class="form-area">
 				<label for="nickname">닉네임</label>
@@ -18,11 +21,15 @@
 				<input id="passwordChk" v-model="passwordChk" type="password" />
 			</div>
 			<div class="term-check">
-				<input type="checkbox" id="termChk" />
-				<label for="termChk">회원가입에 동의하십니까?</label>
+				<input type="checkbox" id="termsChk" @input="isTerms = !isTerms" />
+				<label for="termsChk">회원가입에 동의하십니까?</label>
 			</div>
 			<div class="btn-group">
-				<button type="submit" class="btn success" :disabled="!validation">
+				<button
+					type="submit"
+					class="btn success"
+					:disabled="!emailValid || !isTerms"
+				>
 					회원가입완료
 				</button>
 			</div>
@@ -32,21 +39,23 @@
 
 <script>
 export default {
-	middleware: 'validation',
 	data() {
 		return {
 			email: '',
 			nickname: '',
 			password: '',
 			passwordChk: '',
+			isTerms: false,
 		};
 	},
-	// computed: {
-	// 	emailVal() {
-	// 		return this.validation(this.email);
-	// 	},
-	// },
+	computed: {
+		// 이메일 validation
+		emailValid() {
+			return this.$validation(this.email);
+		},
+	},
 	methods: {
+		// 회원가입 폼 전송
 		async onSubmitForm() {
 			const userData = {
 				email: this.email,

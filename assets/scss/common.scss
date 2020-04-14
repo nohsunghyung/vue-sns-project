@@ -55,6 +55,11 @@ input[type="text"], input[type="password"], input[type="email"] {
   border: 1px solid #d1d1d1;
   background-color: #fff;
 }
+.validation-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: red;
+}
 .form-layout {
   width: 500px;
   margin: 80px auto 0;
