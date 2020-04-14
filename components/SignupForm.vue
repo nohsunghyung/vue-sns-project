@@ -19,6 +19,9 @@
 			<div class="form-area">
 				<label for="passwordChk">비밀번호 확인</label>
 				<input id="passwordChk" v-model="passwordChk" type="password" />
+				<p class="validation-text" v-if="!passwordChkValid && this.passwordChk">
+					비밀번호가 다릅니다.
+				</p>
 			</div>
 			<div class="term-check">
 				<input type="checkbox" id="termsChk" @input="isTerms = !isTerms" />
@@ -28,7 +31,7 @@
 				<button
 					type="submit"
 					class="btn success"
-					:disabled="!emailValid || !isTerms"
+					:disabled="!emailValid || !isTerms || !passwordChkValid"
 				>
 					회원가입완료
 				</button>
@@ -53,11 +56,15 @@ export default {
 		emailValid() {
 			return this.$validation(this.email);
 		},
+		passwordChkValid() {
+			return this.password === this.passwordChk;
+		},
 	},
 	methods: {
 		// 회원가입 폼 전송
 		async onSubmitForm() {
 			const userData = {
+				id: Date.now(),
 				email: this.email,
 				nickname: this.nickname,
 				password: this.password,

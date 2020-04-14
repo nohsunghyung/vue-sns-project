@@ -1,13 +1,20 @@
 <template>
 	<header id="header">
 		<div class="header-inner">
-			<h1><nuxt-link to="/">NodeBird</nuxt-link></h1>
+			<h1>
+				<nuxt-link :to="isLogin ? '/' : '/login'">NodeBird</nuxt-link>
+			</h1>
 			<nav>
 				<ul class="gnb">
-					<li><nuxt-link to="/">메인</nuxt-link></li>
-					<li><nuxt-link to="/profile">프로필</nuxt-link></li>
-					<li><nuxt-link to="/login">로그인</nuxt-link></li>
-					<li><nuxt-link to="/signup">회원가입</nuxt-link></li>
+					<template v-if="isLogin">
+						<li><nuxt-link :to="isLogin ? '/' : '/login'">메인</nuxt-link></li>
+						<li><nuxt-link to="/profile">프로필</nuxt-link></li>
+						<li><a href="javascript:void(0);" @click="logout">로그아웃</a></li>
+					</template>
+					<template v-else>
+						<li><nuxt-link to="/login">로그인</nuxt-link></li>
+						<li><nuxt-link to="/signup">회원가입</nuxt-link></li>
+					</template>
 				</ul>
 			</nav>
 		</div>
@@ -15,7 +22,18 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex';
+export default {
+	computed: {
+		...mapGetters('users', ['isLogin']),
+	},
+	methods: {
+		logout() {
+			this.$store.commit('users/logout');
+			this.$router.push('/login');
+		},
+	},
+};
 </script>
 
 <style></style>

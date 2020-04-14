@@ -1,10 +1,6 @@
 export const state = () => ({});
 
-export const getters = {
-	isLogin: state => {
-		return state.userData != null;
-	},
-};
+export const getters = {};
 
 export const mutations = {};
 
