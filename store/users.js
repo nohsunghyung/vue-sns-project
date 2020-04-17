@@ -24,4 +24,7 @@ export const actions = {
 	login({ commit }, payload) {
 		commit('setUser', payload);
 	},
+	logout({ commit }) {
+		commit('logout');
+	},
 };

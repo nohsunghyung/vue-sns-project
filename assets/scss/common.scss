@@ -22,15 +22,15 @@
   }
 }
 .btn {
-  height: 40px;
-  line-height: 40px;
+  height: 36px;
+  line-height: 36px;
   padding: 0 15px;
   border: 0;
   border-radius: 5px;
   font-weight: bold;
   text-align: center;
   color: #fff;
-  font-size: 16px;
+  font-size: 15px;
   &.success {
     background-color: #5BC0DE;
   }
@@ -38,9 +38,9 @@
     background-color: #D9534F;
   }
   &.normal {
-    border: 1px solid #000;
+    border: 1px solid #aaa;
     background-color: #fff;
-    color: #222;
+    color: #333;
   }
   &:disabled {
     opacity: 0.5;
@@ -94,5 +94,32 @@ input[type="text"], input[type="password"], input[type="email"] {
   .btn-group {
     margin-top: 20px;
     text-align: center;
+  }
+}
+.contents-layout {
+  display: flex;
+}
+.col {
+  padding: 20px;
+  &.col-4 {
+    width: 40%;
+  }
+  &.col-6 {
+    width: 60%;
+  }
+}
+.user-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+	padding: 20px;
+  box-shadow: 0 0 2px 0px #666;
+  border-radius: 5px;
+  background-color: #fff;
+  .user-box {
+    max-width: 250px;
+    strong {
+      font-size: 20px;
+    }
   }
 }

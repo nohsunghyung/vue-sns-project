@@ -1,9 +1,16 @@
 <template>
-	<div>mainpage</div>
+	<div>
+		<post-form></post-form>
+	</div>
 </template>
 
 <script>
-export default {};
+import PostForm from '~/components/PostForm.vue';
+export default {
+	components: {
+		PostForm,
+	},
+};
 </script>
 
 <style></style>

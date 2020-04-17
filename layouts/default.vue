@@ -18,6 +18,7 @@
 import AppHeader from '~/components/common/AppHeader.vue';
 import UserInfo from '~/components/UserInfo.vue';
 export default {
+	name: 'default',
 	components: {
 		AppHeader,
 		UserInfo,
