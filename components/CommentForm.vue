@@ -1,22 +1,25 @@
 <template>
 	<form @submit.prevent="onSubmitForm">
-		<div class="writer-form">
+		<div class="form-wrapper">
 			<textarea
 				name=""
 				id=""
-				placeholder="오늘 하루는 어땠나요?"
+				placeholder="댓글을 달아주세요."
 				v-model="content"
 			></textarea>
-		</div>
-		<div class="btn-group">
-			<button type="button" class="btn normal">이미지 업로드</button>
-			<button type="submit" class="btn success">작성</button>
+			<button type="submit" class="btn success">댓글완료</button>
 		</div>
 	</form>
 </template>
 
 <script>
 export default {
+	props: {
+		postId: {
+			type: Number,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			content: '',
@@ -29,20 +32,20 @@ export default {
 	},
 	methods: {
 		async onSubmitForm() {
-			const postData = {
-				id: Date.now(),
+			const commentData = {
+				id: this.postId,
 				user: this.user.nickname,
 				content: this.content,
-				comment: [],
-				images: [],
-				createdAt: Date.now(),
 			};
 			if (this.content.trim() === '') {
 				alert('내용을 입력해주세요.');
 				return false;
 			}
 			try {
-				const data = await this.$store.dispatch('posts/addPost', postData);
+				const data = await this.$store.dispatch(
+					'posts/addComment',
+					commentData,
+				);
 				this.content = '';
 			} catch (error) {
 				console.log(error);

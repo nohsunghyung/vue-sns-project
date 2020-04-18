@@ -108,18 +108,126 @@ input[type="text"], input[type="password"], input[type="email"] {
     width: 60%;
   }
 }
+.card-box {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
 .user-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-	padding: 20px;
-  box-shadow: 0 0 2px 0px #666;
-  border-radius: 5px;
-  background-color: #fff;
   .user-box {
     max-width: 250px;
     strong {
       font-size: 20px;
+    }
+  }
+}
+.card-inner {
+  padding: 20px;
+}
+.post-form-wrapper {
+  textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}
+.post-card-item {
+  margin-top: 20px;
+  .post-writer {
+    font-size: 18px;
+  }
+  .post-content {
+    margin-top: 10px;
+  }
+  .controller {
+    margin-top: 20px;
+  }
+}
+.post-comment {
+  margin-top: 20px;
+  .form-wrapper {
+    text-align: right;
+  }
+  .btn {
+    margin-top: 10px;
+  }
+  textarea {
+    width: 100%;
+    height: 80px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+  }
+}
+.comment-list {
+  margin-top: 20px;
+  .item {
+    display: flex;
+    align-items: center;
+    + .item {
+      margin-top: 15px;
+    }
+    .user-name {
+      font-weight: bold;
+      font-size: 17px;
+    }
+    .comment {
+      margin-top: 5px;
+      color: #888;
+      font-size: 14px;
+    }
+  }
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 15px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #2F98B7;
+  color: #fff;
+  border-radius: 50%;
+}
+.follow-box {
+  margin-top: 20px;
+}
+.follow-list {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  .item {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    .btn-delete {
+      display: inline-block;
+      vertical-align: middle;
+      height: 24px;
+      line-height: 22px;
+      margin-left: 20px;
+      border: 1px solid #ddd;
+      font-size: 12px;
+      background-color: transparent;
     }
   }
 }
