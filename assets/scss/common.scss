@@ -214,11 +214,8 @@ input[type="text"], input[type="password"], input[type="email"] {
   .item {
     display: flex;
     align-items: center;
-    margin-right: 30px;
+    width: 33.33%;
     margin-bottom: 10px;
-    &:nth-child(3n) {
-      margin-right: 0;
-    }
     .btn-delete {
       display: inline-block;
       vertical-align: middle;

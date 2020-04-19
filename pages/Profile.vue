@@ -10,19 +10,39 @@
 		<div class="card-box follow-box">
 			<strong class="title">팔로잉</strong>
 			<follow-list
-				:users="following"
+				:users="followingList"
 				:removeUser="removeFollwing"
 			></follow-list>
+			<button
+				type="button"
+				class="btn normal btn-more"
+				@click="loadFollowings"
+				v-if="hasMoreFollowing"
+			>
+				더보기
+			</button>
 		</div>
 		<div class="card-box follow-box">
 			<strong class="title">팔로워</strong>
-			<follow-list :users="follower" :removeUser="removeFollwer"></follow-list>
+			<follow-list
+				:users="followerList"
+				:removeUser="removeFollower"
+			></follow-list>
+			<button
+				type="button"
+				class="btn normal btn-more"
+				@click="loadFollowers"
+				v-if="hasMoreFollower"
+			>
+				더보기
+			</button>
 		</div>
 	</div>
 </template>
 
 <script>
 import FollowList from '~/components/FollowList.vue';
+import { mapState } from 'vuex';
 export default {
 	components: {
 		FollowList,
@@ -33,12 +53,16 @@ export default {
 		};
 	},
 	computed: {
-		follower() {
-			return this.$store.state.users.followerList;
-		},
-		following() {
-			return this.$store.state.users.followingList;
-		},
+		...mapState('users', [
+			'followingList',
+			'followerList',
+			'hasMoreFollowing',
+			'hasMoreFollower',
+		]),
+	},
+	fetch({ store }) {
+		store.dispatch('users/loadFollowings');
+		store.dispatch('users/loadFollowers');
 	},
 	methods: {
 		onSubmitForm() {
@@ -52,8 +76,14 @@ export default {
 		removeFollwing(id) {
 			this.$store.dispatch('users/removeFollowing', id);
 		},
-		removeFollwer(id) {
+		removeFollower(id) {
 			this.$store.dispatch('users/removeFollower', id);
+		},
+		loadFollowings() {
+			this.$store.dispatch('users/loadFollowings');
+		},
+		loadFollowers() {
+			this.$store.dispatch('users/loadFollowers');
 		},
 	},
 };

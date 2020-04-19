@@ -1,16 +1,14 @@
 export const state = () => ({
 	userData: '',
-	followingList: [
-		{ id: 1, name: '노군' },
-		{ id: 2, name: '엘리' },
-		{ id: 3, name: '바보' },
-	],
-	followerList: [
-		{ id: 1, name: '성형' },
-		{ id: 2, name: '후후' },
-		{ id: 3, name: '가가' },
-	],
+	followingList: [],
+	followerList: [],
+	hasMoreFollowing: true,
+	hasMoreFollower: true,
 });
+
+const totalFollowing = 8;
+const totalFollower = 8;
+const limit = 3;
 
 export const getters = {
 	isLogin: state => {
@@ -36,6 +34,30 @@ export const mutations = {
 		const idx = state.followerList.findIndex(v => v.id === payload);
 		state.followerList.splice(idx, 1);
 	},
+	loadFollowings(state) {
+		const diff = totalFollowing - state.followingList.length;
+		const userLegnth = diff > limit ? limit : diff;
+		const fakeUser = Array(userLegnth)
+			.fill()
+			.map(() => ({
+				id: Math.random() * 10,
+				name: Math.ceil(Math.random() * 1000).toString(),
+			}));
+		state.followingList = state.followingList.concat(fakeUser);
+		state.hasMoreFollowing = fakeUser.length === limit;
+	},
+	loadFollowers(state) {
+		const diff = totalFollower - state.followerList.length;
+		const userLegnth = diff > limit ? limit : diff;
+		const fakeUser = Array(userLegnth)
+			.fill()
+			.map(() => ({
+				id: Math.random() * 10,
+				name: Math.ceil(Math.random() * 1000).toString(),
+			}));
+		state.followerList = state.followerList.concat(fakeUser);
+		state.hasMoreFollower = fakeUser.length === limit;
+	},
 };
 
 export const actions = {
@@ -56,5 +78,15 @@ export const actions = {
 	},
 	removeFollower({ commit }, payload) {
 		commit('removeFollower', payload);
+	},
+	loadFollowings({ commit, state }) {
+		if (state.hasMoreFollowing) {
+			commit('loadFollowings');
+		}
+	},
+	loadFollowers({ commit, state }) {
+		if (state.hasMoreFollower) {
+			commit('loadFollowers');
+		}
 	},
 };
