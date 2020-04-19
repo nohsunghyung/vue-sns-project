@@ -1,7 +1,9 @@
 <template>
 	<div class="card-box post-card-item">
 		<div class="post-card">
-			<strong class="post-writer">{{ post.user }}</strong>
+			<strong class="post-writer"
+				><nuxt-link :to="`/user/${post.id}`">{{ post.user }}</nuxt-link></strong
+			>
 			<p class="post-content">{{ post.content }}</p>
 			<div class="controller">
 				<button type="button">새로고침</button>

@@ -11,6 +11,7 @@
 }
 .gnb {
   display: flex;
+  align-items: center;
   li {
     + li {
       margin-left: 20px;
@@ -18,6 +19,10 @@
     a {
       display: block;
       color: #fff;
+      border-bottom: 2px solid transparent;
+    }
+    .nuxt-link-exact-active {
+      border-bottom-color:#fff;
     }
   }
 }
@@ -129,6 +134,7 @@ input[type="text"], input[type="password"], input[type="email"] {
   padding: 20px;
 }
 .post-form-wrapper {
+  margin-bottom: 20px;
   textarea {
     width: 100%;
     height: 120px;
@@ -144,7 +150,9 @@ input[type="text"], input[type="password"], input[type="email"] {
   }
 }
 .post-card-item {
-  margin-top: 20px;
+  + .post-card-item {
+    margin-top: 20px;
+  }
   .post-writer {
     font-size: 18px;
   }
