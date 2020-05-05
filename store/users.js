@@ -64,8 +64,16 @@ export const actions = {
 	signup({ commit }, payload) {
 		commit('setUser', payload);
 	},
-	login({ commit }, payload) {
-		commit('setUser', payload);
+	async login({ commit }, payload) {
+		try {
+			const { data } = await this.$axios.post(
+				'http://localhost:3085/user/login',
+				payload,
+			);
+			commit('setUser', data);
+		} catch (error) {
+			console.log(error);
+		}
 	},
 	onChangeName({ commit }, payload) {
 		commit('onChangeName', payload);

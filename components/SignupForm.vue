@@ -71,8 +71,8 @@ export default {
 			};
 			try {
 				const data = await this.$store.dispatch('users/signup', userData);
-				alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
-				this.$router.push('/login');
+				alert('회원가입이 완료되었습니다.');
+				this.$router.push('/');
 			} catch (error) {
 				console.log(error);
 			}
