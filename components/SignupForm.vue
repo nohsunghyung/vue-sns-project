@@ -64,7 +64,6 @@ export default {
 		// 회원가입 폼 전송
 		async onSubmitForm() {
 			const userData = {
-				id: Date.now(),
 				email: this.email,
 				nickname: this.nickname,
 				password: this.password,

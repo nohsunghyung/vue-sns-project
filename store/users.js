@@ -1,3 +1,5 @@
+import { loginUser, signup } from '~/plugins/api/index';
+
 export const state = () => ({
 	userData: '',
 	followingList: [],
@@ -61,15 +63,14 @@ export const mutations = {
 };
 
 export const actions = {
-	signup({ commit }, payload) {
-		commit('setUser', payload);
+	async signup({ commit }, payload) {
+		const { data } = await signup(payload);
+		commit('setUser', data);
 	},
 	async login({ commit }, payload) {
 		try {
-			const { data } = await this.$axios.post(
-				'http://localhost:3085/user/login',
-				payload,
-			);
+			const { data } = await loginUser(payload);
+			console.log(data);
 			commit('setUser', data);
 		} catch (error) {
 			console.log(error);
