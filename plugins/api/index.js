@@ -14,4 +14,9 @@ function loginUser(userData) {
 	return instance.post('user/login', userData);
 }
 
+// 유저 불러오기
+// function loadUser() {
+// 	return instance.get('user');
+// }
+
 export { loginUser, signup };

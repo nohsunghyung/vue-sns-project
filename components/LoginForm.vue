@@ -45,7 +45,6 @@ export default {
 			const userData = {
 				email: this.email,
 				password: this.password,
-				// nickname: '노성형',
 			};
 			try {
 				const data = await this.$store.dispatch('users/login', userData);

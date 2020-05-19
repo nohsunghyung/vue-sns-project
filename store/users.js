@@ -1,4 +1,4 @@
-import { loginUser, signup } from '~/plugins/api/index';
+import { loginUser, signup, loadUser } from '~/plugins/api/index';
 
 export const state = () => ({
 	userData: '',
@@ -63,6 +63,16 @@ export const mutations = {
 };
 
 export const actions = {
+	async loadUser({ commit }) {
+		try {
+			const res = await this.$axios.get('http://localhost:3085/user', {
+				withCredentials: true,
+			});
+			commit('setUser', res.data);
+		} catch (err) {
+			console.error(err);
+		}
+	},
 	async signup({ commit }, payload) {
 		const { data } = await signup(payload);
 		commit('setUser', data);
@@ -70,7 +80,6 @@ export const actions = {
 	async login({ commit }, payload) {
 		try {
 			const { data } = await loginUser(payload);
-			console.log(data);
 			commit('setUser', data);
 		} catch (error) {
 			console.log(error);
